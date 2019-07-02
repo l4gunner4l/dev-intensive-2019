@@ -1,6 +1,5 @@
 package ru.skillbranch.devintensive.extensions
 
-import java.lang.IllegalStateException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -14,9 +13,17 @@ fun Date.format(pattern: String="HH:mm:ss dd.MM.yy"):String {
     return dateFormat.format(this)
 }
 
-fun Date.format1(pattern: String="HH:mm"):String {
-    val dateFormat = SimpleDateFormat(pattern, Locale("ru"))
-    return dateFormat.format(this)
+fun Date.humanizeDiff(): String {
+    val time = this.time
+    val now = Date().time
+    var result = ""
+    if (now - time > 0){
+
+    } else {
+
+    }
+    return result
+
 }
 
 

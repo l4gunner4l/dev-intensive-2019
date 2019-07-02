@@ -6,7 +6,7 @@ import org.junit.Assert.*
 import ru.skillbranch.devintensive.extensions.TimeUnits
 import ru.skillbranch.devintensive.extensions.add
 import ru.skillbranch.devintensive.extensions.format
-import ru.skillbranch.devintensive.extensions.toInitials
+import ru.skillbranch.devintensive.extensions.humanizeDiff
 import ru.skillbranch.devintensive.models.User
 import java.util.*
 
@@ -22,20 +22,10 @@ class ExampleUnitTest {
     }
 
     @Test
-    fun test_User(){
-        val user = User.makeUser(null)
-
-        println("${user}")
-
+    fun test_fun(){
+        print(Date().add(-2, TimeUnits.SECOND).humanizeDiff())
     }
 
-    @Test
-    fun test_trim(){
 
-        println("""
-.${" Nikola Mikhailov ".trim()}.
-.${"    Nikola Mikhailov     ".trim()}.
-        """)
-    }
 
 }
