@@ -23,9 +23,5 @@ class ExampleUnitTest {
 
     @Test
     fun test_fun(){
-        print(Date().add(-2, TimeUnits.SECOND).humanizeDiff())
     }
-
-
-
 }

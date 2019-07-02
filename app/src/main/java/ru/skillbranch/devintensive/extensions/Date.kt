@@ -14,14 +14,18 @@ fun Date.format(pattern: String="HH:mm:ss dd.MM.yy"):String {
 }
 
 fun Date.humanizeDiff(): String {
-    val time = this.time
-    val now = Date().time
+    val interval = Date().time - this.time
     var result = ""
-    if (now - time > 0){
-
-    } else {
-
-    }
+//    if (interval > 0){
+//        when (interval) {
+//
+//        }
+//    } else {
+//        when (interval) {
+//
+//        }
+//
+//    }
     return result
 
 }

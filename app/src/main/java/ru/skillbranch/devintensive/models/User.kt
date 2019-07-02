@@ -39,7 +39,7 @@ isOnline - ${this.isOnline}
 
     companion object Factory{
         private var lastId : Int = -1
-        fun makeUser(fullName: String?): User?{
+        fun makeUser(fullName: String?): User{
             lastId++
             val (firstName, lastName) = Utils.parseFullName(fullName)
             return User("$lastId", firstName, lastName)
