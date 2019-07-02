@@ -14,19 +14,45 @@ fun Date.format(pattern: String="HH:mm:ss dd.MM.yy"):String {
 }
 
 fun Date.humanizeDiff(): String {
-    val interval = Date().time - this.time
-    var result = ""
-//    if (interval > 0){
-//        when (interval) {
-//
-//        }
-//    } else {
-//        when (interval) {
-//
-//        }
-//
-//    }
-    return result
+    var interval = Date().time - this.time
+    if (interval > 0){
+        return when {
+            interval < SECOND -> "только что"
+            interval < 45 * SECOND && interval >= SECOND -> "несколько секунд назад"
+            interval < 75 * SECOND && interval >= 45 * SECOND -> "минуту назад"
+            interval < 45 * MINUTE && interval >= 75 * SECOND -> when { interval/MINUTE<2 -> "${interval/MINUTE} минуту назад"
+                                                                        interval/MINUTE in 2..4 -> "${interval/MINUTE} минуты назад"
+                                                                        else -> "${interval/MINUTE} минуты назад" }
+            interval < 75 * MINUTE && interval >= 45 * MINUTE -> "час назад"
+            interval < 22 * HOUR && interval >= 75 * MINUTE -> when { interval/HOUR<2 -> "${interval/HOUR} час назад"
+                                                                      interval/HOUR in 2..4 -> "${interval/HOUR} часа назад"
+                                                                      else -> "${interval/HOUR} часов назад" }
+            interval < 26 * HOUR && interval >= 22 * HOUR -> "день назад"
+            interval < 360 * DAY && interval >= 26 * HOUR -> when { interval/HOUR<2 -> "${interval/HOUR} день назад"
+                                                                    interval/HOUR in 2..4 -> "${interval/HOUR} дня назад"
+                                                                    else -> "${interval/HOUR} дней назад" }
+            else -> "более года назад"
+        }
+    } else {
+        interval = this.time - Date().time
+        return when {
+            interval < SECOND -> "только что"
+            interval < 45 * SECOND && interval >= SECOND -> "через несколько секунд"
+            interval < 75 * SECOND && interval >= 45 * SECOND -> "через минуту"
+            interval < 45 * MINUTE && interval >= 75 * SECOND -> when { interval/MINUTE<2 -> "через ${interval/MINUTE} минуту"
+                                                                        interval/MINUTE in 2..4 -> "через ${interval/MINUTE} минуты"
+                                                                        else -> "через ${interval/MINUTE} минуты" }
+            interval < 75 * MINUTE && interval >= 45 * MINUTE -> "через час"
+            interval < 22 * HOUR && interval >= 75 * MINUTE -> when { interval/HOUR<2 -> "через ${interval/HOUR} час"
+                                                                      interval/HOUR in 2..4 -> "через ${interval/HOUR} часа"
+                                                                      else -> "через ${interval/HOUR} часов" }
+            interval < 26 * HOUR && interval >= 22 * HOUR -> "через день"
+            interval < 360 * DAY && interval >= 26 * HOUR -> when { interval/HOUR<2 -> "через ${interval/HOUR} день"
+                                                                    interval/HOUR in 2..4 -> "через ${interval/HOUR} дня"
+                                                                    else -> "через ${interval/HOUR} дней" }
+            else -> "более чем через год"
+        }
+    }
 
 }
 
