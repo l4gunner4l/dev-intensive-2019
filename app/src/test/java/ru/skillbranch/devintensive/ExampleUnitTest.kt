@@ -5,6 +5,7 @@ import org.junit.Test
 import org.junit.Assert.*
 import ru.skillbranch.devintensive.extensions.*
 import ru.skillbranch.devintensive.models.User
+import ru.skillbranch.devintensive.utils.Utils
 import java.util.*
 
 /**
@@ -23,7 +24,7 @@ class ExampleUnitTest {
         val user = User("0001", "Nikola", "Mikhailov",
             null, 0,0, Date().add(-5, TimeUnits.HOUR), false)
 
-        print(user.toUserView().printUserView())
+        print(Utils.toInitials("  ", ""))
 
     }
 }

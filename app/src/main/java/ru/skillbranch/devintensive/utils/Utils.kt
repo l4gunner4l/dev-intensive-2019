@@ -19,12 +19,13 @@ object Utils {
     }
 
     fun toInitials(firstName:String?, lastName:String?):String?{
-        var initials = ""
-        if (firstName != null && firstName.trim() != "") initials += firstName.trim()[0].toUpperCase()
-        else return null
-        if (lastName != null && lastName.trim() != "") initials += lastName.trim()[0].toUpperCase()
-        else return initials
-        return initials
+        return if (firstName == null || firstName.trim() == ""){
+            if (lastName == null || lastName.trim() == "") null
+            else "${lastName.trim()[0].toUpperCase()}"
+        } else {
+            if (lastName == null || lastName.trim() == "") "${firstName!!.trim()[0].toUpperCase()}"
+            else "${firstName.trim()[0].toUpperCase()}${lastName.trim()[0].toUpperCase()}"
+        }
     }
 
     fun transliteration(fullName: String, divider:String = "."): String {
