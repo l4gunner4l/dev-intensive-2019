@@ -28,13 +28,13 @@ fun Date.humanizeDiff(): String {
                                                                       interval/HOUR in 2..4 -> "${interval/HOUR} часа назад"
                                                                       else -> "${interval/HOUR} часов назад" }
             interval < 26 * HOUR && interval >= 22 * HOUR -> "день назад"
-            interval < 360 * DAY && interval >= 26 * HOUR -> when { interval/HOUR<2 -> "${interval/HOUR} день назад"
-                                                                    interval/HOUR in 2..4 -> "${interval/HOUR} дня назад"
-                                                                    else -> "${interval/HOUR} дней назад" }
+            interval < 360 * DAY && interval >= 26 * HOUR -> when { interval/DAY<2 -> "${interval/DAY} день назад"
+                                                                    interval/DAY in 2..4 -> "${interval/DAY} дня назад"
+                                                                    else -> "${interval/DAY} дней назад" }
             else -> "более года назад"
         }
     } else {
-        interval = this.time - Date().time
+        interval = this.time - Date().time + 20
         return when {
             interval < SECOND -> "только что"
             interval < 45 * SECOND && interval >= SECOND -> "через несколько секунд"
@@ -47,9 +47,9 @@ fun Date.humanizeDiff(): String {
                                                                       interval/HOUR in 2..4 -> "через ${interval/HOUR} часа"
                                                                       else -> "через ${interval/HOUR} часов" }
             interval < 26 * HOUR && interval >= 22 * HOUR -> "через день"
-            interval < 360 * DAY && interval >= 26 * HOUR -> when { interval/HOUR<2 -> "через ${interval/HOUR} день"
-                                                                    interval/HOUR in 2..4 -> "через ${interval/HOUR} дня"
-                                                                    else -> "через ${interval/HOUR} дней" }
+            interval < 360 * DAY && interval >= 26 * HOUR -> when { interval/DAY<2 -> "через ($interval/$DAY) ${interval/DAY} день"
+                                                                    interval/DAY in 2..4 -> "через ${interval/DAY} дня"
+                                                                    else -> "через ${interval/DAY} дней" }
             else -> "более чем через год"
         }
     }

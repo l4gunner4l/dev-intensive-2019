@@ -28,6 +28,6 @@ object Utils {
     }
 
     fun transliteration(fullName: String, divider:String = "."): String {
-        TODO()
+        return ""
     }
 }
