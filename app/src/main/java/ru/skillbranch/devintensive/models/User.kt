@@ -14,12 +14,6 @@ data class User constructor(
     var isOnline:Boolean = false
     ) {
 
-    constructor(id: String, firstName:String?, lastName: String?) : this(id, firstName, lastName, null){
-        /*some action*/
-    }
-
-    constructor(id: String) : this(id, "Ivan", "Ivanov", null)
-
     init {
         println("User ${this.firstName} had created.")
     }
@@ -42,7 +36,11 @@ isOnline - ${this.isOnline}
         fun makeUser(fullName: String?): User{
             lastId++
             val (firstName, lastName) = Utils.parseFullName(fullName)
-            return User("$lastId", firstName, lastName)
+            return User.Builder()
+                .id("$lastId")
+                .firstName(firstName)
+                .lastName(lastName)
+                .build()
         }
     }
 
@@ -53,7 +51,7 @@ isOnline - ${this.isOnline}
         var avatar:String? = null,
         var rating:Int = 0,
         var respect:Int = 0,
-        var lastVisit:Date? = Date(),
+        var lastVisit:Date? = null,
         var isOnline:Boolean = false
     ){
         fun id(id:String) = apply { this.id = id }
@@ -62,7 +60,9 @@ isOnline - ${this.isOnline}
         fun avatar(avatar:String?) = apply { this.avatar = avatar }
         fun rating(rating:Int ) = apply { this.rating = rating }
         fun respect(respect:Int) = apply { this.respect = respect }
-        fun id(lastVisit:Date? ) = apply { this.lastVisit = lastVisit }
-        fun id(isOnline:Boolean) = apply { this.isOnline = isOnline }
+        fun lastVisit(lastVisit:Date? ) = apply { this.lastVisit = lastVisit }
+        fun isOnline(isOnline:Boolean) = apply { this.isOnline = isOnline }
+
+        fun build() = User(id, firstName, lastName, avatar, rating, respect, lastVisit, isOnline)
     }
 }

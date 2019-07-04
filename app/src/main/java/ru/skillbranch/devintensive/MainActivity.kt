@@ -11,7 +11,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val user1 = User("0001", "Nikola", "Mikhailov")
+        val user1 = User.Builder()
+            .id("0001").firstName("Nikola").lastName("Mikhailov")
+            .build()
 
         val textView: TextView = findViewById(R.id.text_view)
         //textView.text()
