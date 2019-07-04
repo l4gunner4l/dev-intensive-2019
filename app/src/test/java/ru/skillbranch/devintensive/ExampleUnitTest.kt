@@ -21,10 +21,8 @@ class ExampleUnitTest {
 
     @Test
     fun test_fun(){
-        val user = User("0001", "Nikola", "Mikhailov",
-            null, 0,0, Date().add(-5, TimeUnits.HOUR), false)
 
-        print(Utils.toInitials("  ", ""))
+        print(Utils.transliteration("Amazing Петр","_"))
 
     }
 }
