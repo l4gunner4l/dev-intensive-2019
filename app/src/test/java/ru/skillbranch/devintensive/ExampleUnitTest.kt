@@ -22,33 +22,32 @@ class ExampleUnitTest {
     @Test
     fun test_fun(){
 
-        println(Date().add(-1, TimeUnits.SECOND).humanizeDiff())
-        println(Date().add(-2, TimeUnits.SECOND).humanizeDiff())
-        println(Date().add(-4, TimeUnits.SECOND).humanizeDiff())
-        println(Date().add(-6, TimeUnits.SECOND).humanizeDiff())
+        println(TimeUnits.SECOND.plural(1))
+        println(TimeUnits.SECOND.plural(4))
+        println(TimeUnits.SECOND.plural(19))
+        println(TimeUnits.SECOND.plural(21))
+        println(TimeUnits.SECOND.plural(24))
+        println(TimeUnits.SECOND.plural(222))
 
-        println(Date().add(-1, TimeUnits.MINUTE).humanizeDiff())
-        println(Date().add(-2, TimeUnits.MINUTE).humanizeDiff())
-        println(Date().add(-4, TimeUnits.MINUTE).humanizeDiff())
-        println(Date().add(-6, TimeUnits.MINUTE).humanizeDiff())
+        println(TimeUnits.MINUTE.plural(1))
+        println(TimeUnits.MINUTE.plural(4))
+        println(TimeUnits.MINUTE.plural(19))
+        println(TimeUnits.MINUTE.plural(21))
+        println(TimeUnits.MINUTE.plural(24))
+        println(TimeUnits.MINUTE.plural(222))
 
-        println(Date().add(-1, TimeUnits.HOUR).humanizeDiff())
-        println(Date().add(-2, TimeUnits.HOUR).humanizeDiff())
-        println(Date().add(-4, TimeUnits.HOUR).humanizeDiff())
-        println(Date().add(-6, TimeUnits.HOUR).humanizeDiff())
+        println(TimeUnits.DAY.plural(1))
+        println(TimeUnits.DAY.plural(4))
+        println(TimeUnits.DAY.plural(19))
+        println(TimeUnits.DAY.plural(21))
+        println(TimeUnits.DAY.plural(24))
+        println(TimeUnits.DAY.plural(222))
 
-        println(Date().add(-1, TimeUnits.DAY).humanizeDiff())
-        println(Date().add(-2, TimeUnits.DAY).humanizeDiff())
-        println(Date().add(-4, TimeUnits.DAY).humanizeDiff())
-        println(Date().add(-6, TimeUnits.DAY).humanizeDiff())
-        println()
-
-        println(Date().add(-2, TimeUnits.HOUR).humanizeDiff()) //2 часа назад
-        println(Date().add(-5, TimeUnits.DAY).humanizeDiff()) //5 дней назад
-        println(Date().add(2, TimeUnits.MINUTE).humanizeDiff()) //через 2 минуты
-        println(Date().add(7, TimeUnits.DAY).humanizeDiff()) //через 7 дней
-        println(Date().add(-400, TimeUnits.DAY).humanizeDiff()) //более года назад
-        println(Date().add(400, TimeUnits.DAY).humanizeDiff()) //более чем через год
-
+        println(TimeUnits.HOUR.plural(1))
+        println(TimeUnits.HOUR.plural(4))
+        println(TimeUnits.HOUR.plural(19))
+        println(TimeUnits.HOUR.plural(21))
+        println(TimeUnits.HOUR.plural(24))
+        println(TimeUnits.HOUR.plural(222))
     }
 }
