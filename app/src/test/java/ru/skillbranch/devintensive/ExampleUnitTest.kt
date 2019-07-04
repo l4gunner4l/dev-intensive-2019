@@ -22,32 +22,8 @@ class ExampleUnitTest {
     @Test
     fun test_fun(){
 
-        println(TimeUnits.SECOND.plural(1))
-        println(TimeUnits.SECOND.plural(4))
-        println(TimeUnits.SECOND.plural(19))
-        println(TimeUnits.SECOND.plural(21))
-        println(TimeUnits.SECOND.plural(24))
-        println(TimeUnits.SECOND.plural(222))
-
-        println(TimeUnits.MINUTE.plural(1))
-        println(TimeUnits.MINUTE.plural(4))
-        println(TimeUnits.MINUTE.plural(19))
-        println(TimeUnits.MINUTE.plural(21))
-        println(TimeUnits.MINUTE.plural(24))
-        println(TimeUnits.MINUTE.plural(222))
-
-        println(TimeUnits.DAY.plural(1))
-        println(TimeUnits.DAY.plural(4))
-        println(TimeUnits.DAY.plural(19))
-        println(TimeUnits.DAY.plural(21))
-        println(TimeUnits.DAY.plural(24))
-        println(TimeUnits.DAY.plural(222))
-
-        println(TimeUnits.HOUR.plural(1))
-        println(TimeUnits.HOUR.plural(4))
-        println(TimeUnits.HOUR.plural(19))
-        println(TimeUnits.HOUR.plural(21))
-        println(TimeUnits.HOUR.plural(24))
-        println(TimeUnits.HOUR.plural(222))
+        println("Bender Bending Rodriguez — дословно «Сгибальщик Сгибающий Родригес»\".truncate()".truncate())
+        println("Bender Bending Rodriguez — дословно «Сгибальщик Сгибающий Родригес»\".truncate()".truncate(15))
+        println("A     ".truncate(3))
     }
 }
