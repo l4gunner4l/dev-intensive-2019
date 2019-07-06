@@ -51,7 +51,7 @@ isOnline - ${this.isOnline}
         var avatar:String? = null,
         var rating:Int = 0,
         var respect:Int = 0,
-        //var lastVisit:Date? = Date(),
+        var lastVisit:Date = Date(),
         var isOnline:Boolean = false
     ){
         fun id(id:String) = apply { this.id = id }
@@ -60,12 +60,10 @@ isOnline - ${this.isOnline}
         fun avatar(avatar:String?) = apply { this.avatar = avatar }
         fun rating(rating:Int) = apply { this.rating = rating }
         fun respect(respect:Int) = apply { this.respect = respect }
-        //fun lastVisit(lastVisit:Date?) = apply { this.lastVisit = lastVisit }
+        fun lastVisit(lastVisit:Date) = apply { this.lastVisit = lastVisit }
         fun isOnline(isOnline:Boolean) = apply { this.isOnline = isOnline }
 
         fun build() = User(
-            id, firstName, lastName, avatar, rating, respect,
-            //lastVisit,
-            isOnline = isOnline)
+            id, firstName, lastName, avatar, rating, respect, lastVisit, isOnline)
     }
 }
