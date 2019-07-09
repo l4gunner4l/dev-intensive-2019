@@ -21,9 +21,9 @@ class ExampleUnitTest {
 
     @Test
     fun test_fun(){
-
-        println("Bender Bending Rodriguez — дословно «Сгибальщик Сгибающий Родригес»\".truncate()".truncate())
-        println("Bender Bending Rodriguez — дословно «Сгибальщик Сгибающий Родригес»\".truncate()".truncate(15))
-        println("A     ".truncate(3))
+        println("<p class=\"title\">Образовательное    IT-сообщество Skill    Branch</p>".stripHtml())
+        //Образовательное IT-сообщество Skill Branch
+        println("<p>Образовательное   &&&''    IT-сообщество Skill Branch</p>".stripHtml())
+        //Образовательное IT-сообщество Skill Branch
     }
 }

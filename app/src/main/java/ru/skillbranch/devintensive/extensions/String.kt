@@ -7,5 +7,8 @@ fun String.truncate(length:Int = 16): String{
 }
 
 fun String.stripHtml():String{
-    return this
+    return this.trim()
+        .replace("<.*?>".toRegex(),"")
+        .replace("[&<>'\"]".toRegex(),"")
+        .replace("\\s+".toRegex(), " ")
 }
