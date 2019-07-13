@@ -27,7 +27,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         NORMAL(Triple(255, 255, 255)), // white color
         WARNING(Triple(255, 120, 0)),  // color
         DANGER(Triple(255, 60, 60)),   // color
-        CRITICAL(Triple(255, 255, 0)); // red color
+        CRITICAL(Triple(255, 0, 0)); // red color
 
         fun nextStatus():Status{
             return if (this.ordinal < values().lastIndex) values()[this.ordinal + 1]
@@ -36,6 +36,19 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
     }
 
     enum class Question(val question: String, val answers: List<String>){
+
+        /*Question.NAME -> "Имя должно начинаться с заглавной буквы"
+
+        Question.PROFESSION -> "Профессия должна начинаться со строчной буквы"
+
+        Question.MATERIAL -> "Материал не должен содержать цифр"
+
+        Question.BDAY -> "Год моего рождения должен содержать только цифры"
+
+        Question.SERIAL -> "Серийный номер содержит только цифры, и их 7"
+
+        Question.IDLE -> //игнорировать валидацию*/
+
         NAME("Как меня зовут?", listOf("бендер", "bender")){
             override fun nextQuestion(): Question = Question.PROFESSION
         },
