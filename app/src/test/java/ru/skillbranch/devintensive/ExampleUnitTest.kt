@@ -7,6 +7,7 @@ import ru.skillbranch.devintensive.extensions.*
 import ru.skillbranch.devintensive.models.User
 import ru.skillbranch.devintensive.utils.Utils
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -21,9 +22,19 @@ class ExampleUnitTest {
 
     @Test
     fun test_fun(){
-        println("<p class=\"title\">Образовательное    IT-сообщество Skill    Branch</p>".stripHtml())
-        //Образовательное IT-сообщество Skill Branch
-        println("<p>Образовательное   &&&''    IT-сообщество Skill Branch</p>".stripHtml())
-        //Образовательное IT-сообщество Skill Branch
+        println(Date().time - Date().add(-1, TimeUnits.SECOND).time)
+    }
+
+    @Test
+    fun test_git(){
+        println("Amazing_Petr" + "- " + Utils.transliteration("Amazing Петр","_"))
+
+        println("iVan     Stereotizhov" + "- " + Utils.transliteration("иВан     Стереотижов"))
+        println("iVan Stereotizhov" + "- " + Utils.transliteration("иВан Стереотижов"))
+        println("Amazing_PeZhr" + "- " + Utils.transliteration("Amazing ПеЖр", "_"))
+        println("aAbBvVgGdDeEeEzhZhzZiIiIkKlL" + "- " + Utils.transliteration("аАбБвВгГдДеЕёЁжЖзЗиИйЙкКлЛ"))
+        println("mMnNoOpPrRsStTuUfFhHcCshShsh'Sh'" + "- " + Utils.transliteration("мМнНоОпПрРсСтТуУфФхХцЦшШщЩ"))
+        println("Zhizha ZhiZhnaYa" + "- " + Utils.transliteration("Жижа ЖиЖнаЯ"))
+        println("Sobaka is a dog" + "- " + Utils.transliteration("Собака dog", " is a "))
     }
 }
