@@ -21,20 +21,14 @@ class ExampleUnitTest {
     }
 
     @Test
-    fun test_fun(){
-        println(Date().time - Date().add(-1, TimeUnits.SECOND).time)
-    }
+    fun test_fun() {
+        println("false = " + """\D+""".toRegex().matches("1234"))
+        println("false = " + """\D+""".toRegex().matches("hjdfgudhb0"))
+        println("false = " + """\D+""".toRegex().matches("12hjgndg"))
+        println("true = " + """\D+""".toRegex().matches("metal"))
+        println("true = " + """\D+""".toRegex().matches("iron"))
+        println("true = " + """\D+""".toRegex().matches("Iron"))
+        println("true = " + """\D+""".toRegex().matches("дерево"))
 
-    @Test
-    fun test_git(){
-        println("Amazing_Petr" + "- " + Utils.transliteration("Amazing Петр","_"))
-
-        println("iVan     Stereotizhov" + "- " + Utils.transliteration("иВан     Стереотижов"))
-        println("iVan Stereotizhov" + "- " + Utils.transliteration("иВан Стереотижов"))
-        println("Amazing_PeZhr" + "- " + Utils.transliteration("Amazing ПеЖр", "_"))
-        println("aAbBvVgGdDeEeEzhZhzZiIiIkKlL" + "- " + Utils.transliteration("аАбБвВгГдДеЕёЁжЖзЗиИйЙкКлЛ"))
-        println("mMnNoOpPrRsStTuUfFhHcCshShsh'Sh'" + "- " + Utils.transliteration("мМнНоОпПрРсСтТуУфФхХцЦшШщЩ"))
-        println("Zhizha ZhiZhnaYa" + "- " + Utils.transliteration("Жижа ЖиЖнаЯ"))
-        println("Sobaka is a dog" + "- " + Utils.transliteration("Собака dog", " is a "))
     }
 }

@@ -5,6 +5,8 @@ import android.app.PendingIntent.getActivity
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.EditText
@@ -45,6 +47,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         textTextView.text = benderObj.askQuestion()
         sendBtn.setOnClickListener(this)
+
     }
 
     override fun onStart() {
@@ -86,7 +89,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         if (v?.id==R.id.iv_send){
             activity.hideKeyboard()
-            val (phrase, color) = benderObj.listenAnswer(messageEditT.text.toString().toLowerCase())
+            val (phrase, color) = benderObj.listenAnswer(messageEditT.text.toString().trim())
             val (r, g, b) = color
             messageEditT.setText("")
             textTextView.text = phrase

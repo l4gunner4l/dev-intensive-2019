@@ -13,21 +13,29 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         }
 
     fun listenAnswer(answer: String): Pair<String, Triple<Int, Int, Int>>{
-        return if (question.answers.contains(answer)) {
-            //status = Status.NORMAL
-            question = question.nextQuestion()
-            "Отлично - ты справился\n${question.question}" to status.color
-        } else {
-            if (status == Status.CRITICAL){
-                status = status.nextStatus()
-                question = Question.NAME
-                "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color
+        return if (question == Question.IDLE) {
+            status = Status.NORMAL
+            question.question to status.color
+        }
+        else if (question.isValidate(answer)){
+                if (question.answers.contains(answer.toLowerCase())) {
+                    question = question.nextQuestion()
+                    "Отлично - ты справился\n${question.question}" to status.color
+                } else {
+                    if (status == Status.CRITICAL){
+                        status = status.nextStatus()
+                        question = Question.NAME
+                        "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color
+                    } else {
+                        status = status.nextStatus()
+                        "Это неправильный ответ\n${question.question}" to status.color
+                    }
+
+                }
             } else {
-                status = status.nextStatus()
-                "Это неправильный ответ\n${question.question}" to status.color
+                "${question.errorMsg}\n${question.question}" to status.color
             }
 
-        }
     }
 
     enum class Status(val color: Triple<Int, Int, Int>){
@@ -42,39 +50,47 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         }
     }
 
-    enum class Question(val question: String, val answers: List<String>){
+    enum class Question(val question: String, val answers: List<String>, val errorMsg: String){
 
-        /*Question.NAME -> "Имя должно начинаться с заглавной буквы"
-
-        Question.PROFESSION -> "Профессия должна начинаться со строчной буквы"
-
-        Question.MATERIAL -> "Материал не должен содержать цифр"
-
-        Question.BDAY -> "Год моего рождения должен содержать только цифры"
-
-        Question.SERIAL -> "Серийный номер содержит только цифры, и их 7"
-
-        Question.IDLE -> //игнорировать валидацию*/
-
-        NAME("Как меня зовут?", listOf("бендер", "bender")){
+        NAME("Как меня зовут?", listOf("бендер", "bender"), "Имя должно начинаться с заглавной буквы"){
             override fun nextQuestion(): Question = PROFESSION
+            override fun isValidate(answer: String): Boolean {
+                return answer[0].isUpperCase()
+            }
         },
-        PROFESSION("Назови мою профессию?", listOf("сгибальщик", "bender")){
+        PROFESSION("Назови мою профессию?", listOf("сгибальщик", "bender"), "Профессия должна начинаться со строчной буквы"){
             override fun nextQuestion(): Question = MATERIAL
+            override fun isValidate(answer: String): Boolean {
+                return answer[0].isLowerCase()
+            }
         },
-        MATERIAL("Из чего я сделан?", listOf("металл", "дерево", "iron", "metal", "wood")){
+        MATERIAL("Из чего я сделан?", listOf("металл", "дерево", "iron", "metal", "wood"), "Материал не должен содержать цифр"){
             override fun nextQuestion(): Question = BDAY
+            override fun isValidate(answer: String): Boolean {
+                return """\D+""".toRegex().matches(answer)
+            }
         },
-        BDAY("Когда меня создали?", listOf("2993")){
+        BDAY("Когда меня создали?", listOf("2993"), "Год моего рождения должен содержать только цифры"){
             override fun nextQuestion(): Question = SERIAL
+            override fun isValidate(answer: String): Boolean {
+                return """\d+""".toRegex().matches(answer)
+            }
         },
-        SERIAL("Мой серийный номер?", listOf("2716057")){
+        SERIAL("Мой серийный номер?", listOf("2716057"), "Серийный номер содержит только цифры, и их 7"){
             override fun nextQuestion(): Question = IDLE
+            override fun isValidate(answer: String): Boolean {
+                return """\d{7}""".toRegex().matches(answer)
+            }
         },
-        IDLE("На этом все, вопросов больше нет", listOf()){
+        IDLE("На этом все, вопросов больше нет", listOf(), ""){
             override fun nextQuestion(): Question = IDLE
+            override fun isValidate(answer: String): Boolean {
+                return true
+            }
         };
 
         abstract fun nextQuestion(): Question
+        abstract fun isValidate(answer:String): Boolean
     }
+
 }
