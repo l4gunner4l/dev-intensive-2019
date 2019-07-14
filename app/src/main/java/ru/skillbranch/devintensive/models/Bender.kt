@@ -16,10 +16,10 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         return if (question.answers.contains(answer)) {
             //status = Status.NORMAL
             question = question.nextQuestion()
-            "Отлично - это правильный ответ!\n${question.question}" to status.color
+            "Отлично - ты справился\n${question.question}" to status.color
         } else {
             status = status.nextStatus()
-            "Это не правильный ответ!\n${question.question}" to status.color
+            "Это неправильный ответ!\n${question.question}" to status.color
         }
     }
 
@@ -58,7 +58,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         MATERIAL("Из чего я сделан?", listOf("металл", "дерево", "iron", "metal", "wood")){
             override fun nextQuestion(): Question = BDAY
         },
-        BDAY("Когда меня создали", listOf("2993")){
+        BDAY("Когда меня создали?", listOf("2993")){
             override fun nextQuestion(): Question = SERIAL
         },
         SERIAL("Мой серийный номер?", listOf("2716057")){
