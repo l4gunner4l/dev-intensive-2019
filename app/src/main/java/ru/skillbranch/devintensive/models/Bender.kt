@@ -50,22 +50,22 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         Question.IDLE -> //игнорировать валидацию*/
 
         NAME("Как меня зовут?", listOf("бендер", "bender")){
-            override fun nextQuestion(): Question = Question.PROFESSION
+            override fun nextQuestion(): Question = PROFESSION
         },
         PROFESSION("Назови мою профессию?", listOf("сгибальщик", "bender")){
-            override fun nextQuestion(): Question = Question.MATERIAL
+            override fun nextQuestion(): Question = MATERIAL
         },
         MATERIAL("Из чего я сделан?", listOf("металл", "дерево", "iron", "metal", "wood")){
-            override fun nextQuestion(): Question = Question.BDAY
+            override fun nextQuestion(): Question = BDAY
         },
-        BDAY("Когда меня создали?", listOf("2993")){
-            override fun nextQuestion(): Question = Question.SERIAL
+        BDAY("Когда меня создали", listOf("2993")){
+            override fun nextQuestion(): Question = SERIAL
         },
         SERIAL("Мой серийный номер?", listOf("2716057")){
-            override fun nextQuestion(): Question = Question.IDLE
+            override fun nextQuestion(): Question = IDLE
         },
         IDLE("На этом все, вопросов больше нет", listOf()){
-            override fun nextQuestion(): Question = Question.IDLE
+            override fun nextQuestion(): Question = IDLE
         };
 
         abstract fun nextQuestion(): Question
