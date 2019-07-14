@@ -1,5 +1,7 @@
 package ru.skillbranch.devintensive
 
+import android.app.Activity
+import android.app.PendingIntent.getActivity
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
@@ -10,19 +12,23 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import ru.skillbranch.devintensive.extensions.hideKeyboard
 import ru.skillbranch.devintensive.models.Bender
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
-    lateinit var benderImage:ImageView
-    lateinit var textTextView:TextView
-    lateinit var messageEditT:EditText
-    lateinit var sendBtn:ImageView
-    lateinit var benderObj: Bender
+    private lateinit var benderImage:ImageView
+    private lateinit var textTextView:TextView
+    private lateinit var messageEditT:EditText
+    private lateinit var sendBtn:ImageView
+    private lateinit var benderObj: Bender
+    private lateinit var activity: Activity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        activity = this
 
         benderImage = iv_bender
         textTextView = tv_text
@@ -79,6 +85,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         if (v?.id==R.id.iv_send){
+            activity.hideKeyboard()
             val (phrase, color) = benderObj.listenAnswer(messageEditT.text.toString().toLowerCase())
             val (r, g, b) = color
             messageEditT.setText("")
