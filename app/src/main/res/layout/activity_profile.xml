@@ -24,9 +24,9 @@
         <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="@dimen/spacing_normal_16">
+                android:layout_gravity="center">
             <ImageButton
+                    android:id="@+id/btn_switch_theme"
                     android:layout_width="@dimen/btn_round_size_40"
                     android:layout_height="@dimen/btn_round_size_40"
                     android:background="@drawable/btn_round_bg"
@@ -39,7 +39,8 @@
                     android:layout_width="@dimen/avatar_round_size"
                     android:layout_height="@dimen/avatar_round_size"
                     android:src="@drawable/avatar_default"
-                    android:layout_centerHorizontal="true"/>
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentTop="true"/>
             <ImageButton
                     android:layout_width="@dimen/btn_round_size_40"
                     android:layout_height="@dimen/btn_round_size_40"
@@ -47,21 +48,23 @@
                     android:src="@drawable/ic_edit_black_24dp"
                     android:layout_toEndOf="@+id/iv_avatar"
                     android:layout_marginStart="@dimen/spacing_huge_32"
-                    android:layout_marginTop="36dp"/>
+                    android:layout_marginTop="36dp" android:id="@+id/btn_edit"/>
 
             <TextView
-                    android:id="@+id/tv_name"
+                    android:id="@+id/tv_nick_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/iv_avatar"
+                    android:text="John Doe"
                     tools:text="John Doe"
                     style="@style/Profile.Header.Nickname"/>
             <TextView
                     android:id="@+id/tv_rank"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_name"
+                    android:layout_below="@id/tv_nick_name"
                     tools:text="Junior Android Developer"
+                    android:text="Junior Android Developer"
                     style="@style/Profile.Header.Rank"/>
         </RelativeLayout>
     </FrameLayout>
@@ -82,6 +85,7 @@
                 android:paddingTop="@dimen/font_normal_16"
                 android:paddingBottom="@dimen/font_normal_16">
             <TextView
+                    android:id="@+id/tv_rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
@@ -109,6 +113,7 @@
                 android:paddingTop="@dimen/font_normal_16"
                 android:paddingBottom="@dimen/font_normal_16">
             <TextView
+                    android:id="@+id/tv_respect"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
@@ -183,12 +188,13 @@
         <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/wr_about"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_normal_16"
+                app:counterMaxLength="120">
             <EditText
                     android:id="@+id/et_about"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/spacing_normal_16"
                     android:hint="@string/profile_hint_about"
                     style="@style/Profile.EditText.Multiline"/>
         </com.google.android.material.textfield.TextInputLayout>
@@ -215,8 +221,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_normal_16"
-                android:layout_marginEnd="@dimen/spacing_normal_16">
+                android:layout_marginStart="@dimen/spacing_normal_16">
             <EditText
                     android:id="@+id/et_repository"
                     android:layout_width="match_parent"
@@ -229,8 +234,9 @@
         <ImageView
                 android:layout_width="@dimen/btn_size_small_24"
                 android:layout_height="@dimen/btn_size_small_24"
+                android:layout_marginStart="@dimen/spacing_normal_16"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_eye_24dp"/>
+                android:src="@drawable/ic_eye_24dp" android:id="@+id/ic_eye"/>
     </LinearLayout>
 
 
