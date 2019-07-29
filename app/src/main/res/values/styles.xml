@@ -1,6 +1,11 @@
 <resources>
 
 
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/background_splash</item>
+    </style>
+
+
 
     <style name="Profile">
 
@@ -23,6 +28,8 @@
         <item name="android:maxLength">128</item>
     </style>
 
+
+
     <style name="Profile.Header" parent="Profile">
         <item name="android:textColor">@android:color/white</item>
         <item name="android:layout_centerHorizontal">true</item>
@@ -37,6 +44,8 @@
     <style name="Profile.Header.Rank" parent="Profile.Header">
         <item name="android:textSize">@dimen/font_normal_16</item>
     </style>
+
+
 
     <style name="Profile.Metrics" parent="Profile">
         <item name="android:textColor">@android:color/white</item>

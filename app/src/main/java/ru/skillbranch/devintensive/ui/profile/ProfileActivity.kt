@@ -27,10 +27,10 @@ class ProfileActivity : AppCompatActivity(){
     private lateinit var viewModel: ProfileViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile)
         Log.d("M_MainActivity", "onCreate")
-        Log.d("M_ProfileActivity", "${isEditMode}")
+        setContentView(R.layout.activity_profile)
         initViews(savedInstanceState)
         initViewModel()
     }
@@ -115,8 +115,6 @@ class ProfileActivity : AppCompatActivity(){
             if (isEditMode) saveProfileInfo()
             isEditMode = !isEditMode
             showCurrentMode(isEditMode)
-            Log.d("M_ProfileActivity", "isEditMode ${isEditMode}")
-            Log.d("M_ProfileActivity", "et_first_name.isEnabled ${et_first_name.isEnabled}")
         }
 
         btn_switch_theme.setOnClickListener{
