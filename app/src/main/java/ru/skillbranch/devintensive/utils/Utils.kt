@@ -1,6 +1,9 @@
 package ru.skillbranch.devintensive.utils
 
 object Utils {
+
+    //"""(https://)?(www.)?github.com/(\w*[^/])"""
+
     fun parseFullName(fullName: String?): Pair<String?, String?>{
         if (fullName != null && !fullName.isEmpty()) {
             val fullNameList: List<String> = fullName.trim().split(" ")

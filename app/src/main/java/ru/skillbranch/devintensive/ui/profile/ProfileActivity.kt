@@ -14,86 +14,32 @@ import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_profile.*
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.Profile
+import ru.skillbranch.devintensive.utils.Utils
 import ru.skillbranch.devintensive.viewmodels.ProfileViewModel
 
 class ProfileActivity : AppCompatActivity(){
 
-    companion object{
-        const val IS_EDIT_MODE = "IS_EDIT_MODE"
-    }
+    companion object{ const val IS_EDIT_MODE = "IS_EDIT_MODE" }
 
-    var isEditMode = false
-    lateinit var viewFields : Map<String, TextView>
+    private var isEditMode = false
+    private lateinit var viewFields : Map<String, TextView>
     private lateinit var viewModel: ProfileViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
-        Log.d("M_MainActivity", "onCreate")
+        Log.d("M_ProfileActivity", "onCreate")
         setContentView(R.layout.activity_profile)
+
         initViews(savedInstanceState)
         initViewModel()
     }
 
-    override fun onStart() {
-        super.onStart()
-        Log.d("M_MainActivity", "onStart")
 
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d("M_MainActivity", "onResume")
-
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        Log.d("M_MainActivity", "onRestart")
-
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.d("M_MainActivity", "onPause")
-
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d("M_MainActivity", "onStop")
-
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("M_MainActivity", "onDestroy")
-
-    }
 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
         outState?.putBoolean(IS_EDIT_MODE, isEditMode)
-    }
-
-    private fun initViewModel(){
-        viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
-        viewModel.getProfileData().observe(this, Observer{ updateUI(it) })
-        viewModel.getTheme().observe(this, Observer{ updateTheme(it) })
-    }
-
-    private fun updateTheme(mode: Int) {
-        Log.d("M_ProfileActivity","updateTheme")
-        delegate.setLocalNightMode(mode)
-    }
-
-    private fun updateUI(profile: Profile) {
-        profile.toMap().also {
-            for((k,v) in viewFields){
-                v.text = it[k].toString()
-            }
-        }
-
     }
 
     private fun initViews(savedInstanceState: Bundle?) {
@@ -120,6 +66,27 @@ class ProfileActivity : AppCompatActivity(){
         btn_switch_theme.setOnClickListener{
             viewModel.switchTheme()
         }
+
+    }
+
+    private fun initViewModel(){
+        viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
+        viewModel.getProfileData().observe(this, Observer{ updateUI(it) })
+        viewModel.getTheme().observe(this, Observer{ updateTheme(it) })
+    }
+
+    private fun updateTheme(mode: Int) {
+        Log.d("M_ProfileActivity","updateTheme")
+        delegate.setLocalNightMode(mode)
+    }
+
+    private fun updateUI(profile: Profile) {
+        profile.toMap().also {
+            for((k,v) in viewFields){
+                v.text = it[k].toString()
+            }
+        }
+
     }
 
     private fun showCurrentMode(isEdit: Boolean) {
@@ -159,5 +126,6 @@ class ProfileActivity : AppCompatActivity(){
             viewModel.saveProfileData(this)
         }
     }
+
 }
 

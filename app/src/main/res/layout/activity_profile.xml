@@ -34,11 +34,12 @@
                     android:layout_toStartOf="@+id/iv_avatar"
                     android:layout_marginEnd="@dimen/spacing_huge_32"
                     android:layout_marginTop="36dp"/>
-            <ImageView
+            <ru.skillbranch.devintensive.ui.custom.CircleImageView
                     android:id="@+id/iv_avatar"
                     android:layout_width="@dimen/avatar_round_size"
                     android:layout_height="@dimen/avatar_round_size"
-                    android:src="@drawable/avatar_default"
+                    android:src="@drawable/meee"
+
                     android:layout_centerHorizontal="true"
                     android:layout_alignParentTop="true"/>
             <ImageButton
@@ -55,7 +56,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/iv_avatar"
-                    android:text="John Doe"
                     tools:text="John Doe"
                     style="@style/Profile.Header.Nickname"/>
             <TextView
@@ -64,7 +64,6 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_nick_name"
                     tools:text="Junior Android Developer"
-                    android:text="Junior Android Developer"
                     style="@style/Profile.Header.Rank"
             />
         </RelativeLayout>
