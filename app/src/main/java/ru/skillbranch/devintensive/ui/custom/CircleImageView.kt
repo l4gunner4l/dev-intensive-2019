@@ -1,5 +1,6 @@
 package ru.skillbranch.devintensive.ui.custom
 
+import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.content.Context
 import android.graphics.*
@@ -33,34 +34,44 @@ class CircleImageView @JvmOverloads constructor(context: Context, attrs: Attribu
 
     private val mInitialized: Boolean
 
-    var borderColor: Int
-        @ColorInt
+    private var borderColor: Int
+        /*@ColorInt
         get() = mBorderPaint.color
         set(@ColorInt color) {
             mBorderPaint.color = color
             invalidate()
-        }
+        }*/
 
-    var borderWidth: Float
-        @Dimension
+    private var borderWidth: Float
+        /*@Dimension
         get() = mBorderPaint.strokeWidth
         set(@Dimension width) {
             mBorderPaint.strokeWidth = width
             invalidate()
-        }
+        }*/
 
-    //TODO @Dimension getBorderWidth():Int
-    //TODO setBorderWidth(@Dimension dp:Int)
+    @Dimension fun getBorderWidth(): Int = mBorderPaint.strokeWidth.toInt()
 
-    //TODO getBorderColor():Int
-    //TODO setBorderColor(hex:String)
-    //TODO setBorderColor(@ColorRes colorId: Int)
+    fun setBorderWidth(@Dimension dp:Int) {
+        mBorderPaint.strokeWidth = dp.toFloat()
+        invalidate()}
+
+    fun getBorderColor(): Int = mBorderPaint.color
+
+    fun setBorderColor(hex:String) {
+        mBorderPaint.color = Color.parseColor(hex)
+        invalidate()}
+
+    @SuppressLint("ResourceAsColor")
+    fun setBorderColor(@ColorRes colorId: Int) {
+        mBorderPaint.color = colorId
+        invalidate()}
 
 
     init {
 
-        var borderColor = DEFAULT_BORDER_COLOR
-        var borderWidth = DEFAULT_BORDER_WIDTH
+        borderColor = DEFAULT_BORDER_COLOR
+        borderWidth = DEFAULT_BORDER_WIDTH
 
         if (attrs != null) {
             val a = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView, 0, 0)

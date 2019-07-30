@@ -1,5 +1,7 @@
 package ru.skillbranch.devintensive.ui.profile
 
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.graphics.ColorFilter
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
@@ -14,8 +16,9 @@ import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_profile.*
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.Profile
-import ru.skillbranch.devintensive.utils.Utils
 import ru.skillbranch.devintensive.viewmodels.ProfileViewModel
+
+
 
 class ProfileActivity : AppCompatActivity(){
 
@@ -25,11 +28,12 @@ class ProfileActivity : AppCompatActivity(){
     private lateinit var viewFields : Map<String, TextView>
     private lateinit var viewModel: ProfileViewModel
 
+    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.AppTheme)
+        setTheme(ru.skillbranch.devintensive.R.style.AppTheme)
         super.onCreate(savedInstanceState)
         Log.d("M_ProfileActivity", "onCreate")
-        setContentView(R.layout.activity_profile)
+        setContentView(ru.skillbranch.devintensive.R.layout.activity_profile)
 
         initViews(savedInstanceState)
         initViewModel()
@@ -104,12 +108,12 @@ class ProfileActivity : AppCompatActivity(){
         with(btn_edit){
             val filter: ColorFilter? = if(isEdit) {
                 PorterDuffColorFilter(
-                    resources.getColor(R.color.color_accent, theme),
+                    resources.getColor(ru.skillbranch.devintensive.R.color.color_accent, theme),
                     PorterDuff.Mode.SRC_IN
                 ) }
                 else null
-            val icon = if (isEdit){ resources.getDrawable(R.drawable.ic_save_black_24dp, theme) }
-                       else { resources.getDrawable(R.drawable.ic_edit_black_24dp, theme) }
+            val icon = if (isEdit){ resources.getDrawable(ru.skillbranch.devintensive.R.drawable.ic_save_black_24dp, theme) }
+                       else { resources.getDrawable(ru.skillbranch.devintensive.R.drawable.ic_edit_black_24dp, theme) }
 
             background.colorFilter = filter
             setImageDrawable(icon)
