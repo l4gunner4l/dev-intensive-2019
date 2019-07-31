@@ -42,7 +42,7 @@ class CircleImageView @JvmOverloads constructor(context: Context, attrs: Attribu
             invalidate()
         }*/
 
-    private var borderWidth: Float
+    private var borderWidth: Int
         /*@Dimension
         get() = mBorderPaint.strokeWidth
         set(@Dimension width) {
@@ -71,16 +71,12 @@ class CircleImageView @JvmOverloads constructor(context: Context, attrs: Attribu
     init {
 
         borderColor = DEFAULT_BORDER_COLOR
-        borderWidth = DEFAULT_BORDER_WIDTH * resources.displayMetrics.density.toInt()
+        borderWidth = DEFAULT_BORDER_WIDTH
 
         if (attrs != null) {
             val a = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView, 0, 0)
-
             borderColor = a.getColor(R.styleable.CircleImageView_cv_borderColor, DEFAULT_BORDER_COLOR)
-            borderWidth = a.getDimension(R.styleable.CircleImageView_cv_borderWidth,
-                DEFAULT_BORDER_WIDTH * resources.displayMetrics.density
-            )
-
+            borderWidth = a.getDimensionPixelSize(R.styleable.CircleImageView_cv_borderWidth, DEFAULT_BORDER_WIDTH)
             a.recycle()
         }
 
@@ -91,7 +87,7 @@ class CircleImageView @JvmOverloads constructor(context: Context, attrs: Attribu
         mBitmapDrawBounds = RectF()
         mBorderPaint.color = borderColor
         mBorderPaint.style = Paint.Style.STROKE
-        mBorderPaint.strokeWidth = borderWidth
+        mBorderPaint.strokeWidth = borderWidth.toFloat()
 
         mPressedPaint = Paint(Paint.ANTI_ALIAS_FLAG)
         mPressedPaint.style = Paint.Style.FILL
@@ -223,7 +219,7 @@ class CircleImageView @JvmOverloads constructor(context: Context, attrs: Attribu
     }
 
     companion object {
-        private const val DEFAULT_BORDER_WIDTH = 2f
+        private const val DEFAULT_BORDER_WIDTH = 2
         private const val DEFAULT_BORDER_COLOR = Color.WHITE
     }
 }

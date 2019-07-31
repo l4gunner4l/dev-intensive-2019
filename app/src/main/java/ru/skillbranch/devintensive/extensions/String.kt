@@ -17,6 +17,13 @@ private val exceptions = setOf("enterprise", "features", "topics", "collections"
                                "pricing", "nonprofit", "customer-stories", "security", "login", "join")
 
 fun String.isValidGitHub():Boolean {
+    return if (this in exceptions) false
+    else """(https://)?(www.)?github.com/(\w*[^/])""".toRegex().matches(this)
+}
 
-    return """(https://)?(www.)?github.com/(\w*[^/])""".toRegex().matches(this)
+private fun String.getName():String{
+    var result = ""
+    for (i in this.length..0){
+        result += this[i]
+    }
 }
