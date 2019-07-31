@@ -27,6 +27,7 @@ class ExampleUnitTest {
         println("валидно - " + "www.github.com/johnDoe".isValidGitHubUrl())
         println("валидно - " + "github.com/johnDoe".isValidGitHubUrl())
         println("валидно - " + "github.com/john-Doe".isValidGitHubUrl())
+        println("валидно - " + "github.com/ds-fd".isValidGitHubUrl())
         println("невалидно - " + "github.com/johnDo-e".isValidGitHubUrl())
         println("невалидно - " + "github.com/johnDo-".isValidGitHubUrl())
         println("невалидно - " + "https://anyDomain.github.com/johnDoe".isValidGitHubUrl())

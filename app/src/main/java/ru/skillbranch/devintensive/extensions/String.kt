@@ -15,7 +15,7 @@ fun String.stripHtml():String{
 
 fun String.isValidGitHubUrl():Boolean {
     return if (this == "") true
-    else if (!"""(https://)?(www.)?github.com/(\w*(_)?(-)?\w{2,}[^-/])""".toRegex().matches(this)) false
+    else if (!"""(https://)?(www.)?github.com/(\w*(_)?(-)?\w{2,}(?![^-/]))""".toRegex().matches(this)) false
     else this.getGitHubName() !in exceptions
 }
 
