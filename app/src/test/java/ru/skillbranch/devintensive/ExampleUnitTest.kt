@@ -22,19 +22,9 @@ class ExampleUnitTest {
 
     @Test
     fun test_fun() {
-        println(" //валиден = " + "https://github.com/johnDoe".isValidGitHub())
-        println(" //валиден = " + "https://www.github.com/johnDoe".isValidGitHub())
-        println(" //валиден = " + "www.github.com/johnDoe".isValidGitHub())
-        println(" //валиден = " + "github.com/johnDoe".isValidGitHub())
-        println("")
-        println(" //невалиден = " + "https://anyDomain.github.com/johnDoe".isValidGitHub())
-        println(" //невалиден = " + "https://github.com/".isValidGitHub())
-        println(" //невалиден = " + "https://github.com".isValidGitHub())
-        println(" //невалиден = " + "https://github.com/johnDoe/tree".isValidGitHub())
-        println(" //невалиден = " + "https://github.com/johnDoe/tree/something".isValidGitHub())
-        println(" //невалиден = " + "https://github.com/enterprise".isValidGitHub())
-        println(" //невалиден = " + "https://github.com/pricing".isValidGitHub())
-        println(" //невалиден = " + "https://github.com/join".isValidGitHub())
 
     }
+
+
+
 }

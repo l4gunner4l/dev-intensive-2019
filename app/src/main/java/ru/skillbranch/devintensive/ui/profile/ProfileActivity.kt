@@ -1,11 +1,14 @@
 package ru.skillbranch.devintensive.ui.profile
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.Color
 import android.graphics.ColorFilter
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.EditText
@@ -15,6 +18,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_profile.*
 import ru.skillbranch.devintensive.R
+import ru.skillbranch.devintensive.extensions.isValidGitHubUrl
 import ru.skillbranch.devintensive.models.Profile
 import ru.skillbranch.devintensive.viewmodels.ProfileViewModel
 
@@ -29,10 +33,10 @@ class ProfileActivity : AppCompatActivity(){
     private lateinit var viewModel: ProfileViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(ru.skillbranch.devintensive.R.style.AppTheme)
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         Log.d("M_ProfileActivity", "onCreate")
-        setContentView(ru.skillbranch.devintensive.R.layout.activity_profile)
+        setContentView(R.layout.activity_profile)
 
         initViews(savedInstanceState)
         initViewModel()
@@ -71,6 +75,10 @@ class ProfileActivity : AppCompatActivity(){
             viewModel.switchTheme()
         }
 
+        et_repository.afterTextChanged {
+            if (!it.isValidGitHubUrl()) wr_repository.error = "Невалидный адрес репозитория"
+            else wr_repository.isErrorEnabled = false
+        }
     }
 
     private fun initViewModel(){
@@ -121,14 +129,33 @@ class ProfileActivity : AppCompatActivity(){
     }
 
     private fun saveProfileInfo(){
-        Profile(
-            firstName = et_first_name.text.toString(),
-            lastName = et_last_name.text.toString(),
-            about = et_about.text.toString(),
-            repository = et_repository.text.toString()
-        ).apply {
-            viewModel.saveProfileData(this)
+        if (et_repository.text.toString().isValidGitHubUrl()) {
+            Profile(
+                firstName = et_first_name.text.toString(),
+                lastName = et_last_name.text.toString(),
+                about = et_about.text.toString(),
+                repository = et_repository.text.toString()
+            ).apply {
+                viewModel.saveProfileData(this)
+            }
         }
+        else {
+            et_repository.setText("")
+        }
+    }
+
+    private fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
+        this.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun afterTextChanged(editable: Editable?) {
+                afterTextChanged.invoke(editable.toString())
+            }
+        })
     }
 
 }

@@ -52,7 +52,7 @@ class CircleImageView @JvmOverloads constructor(context: Context, attrs: Attribu
 
     @Dimension fun getBorderWidth(): Int = mBorderPaint.strokeWidth.toInt()
 
-    fun setBorderWidth(@Dimension dp:Int) {
+    fun setBorderWidth(@Dimension (unit = Dimension.DP) dp:Int) {
         mBorderPaint.strokeWidth = dp.toFloat()
         invalidate()}
 
@@ -62,10 +62,10 @@ class CircleImageView @JvmOverloads constructor(context: Context, attrs: Attribu
         mBorderPaint.color = Color.parseColor(hex)
         invalidate()}
 
-    @SuppressLint("ResourceAsColor")
     fun setBorderColor(@ColorRes colorId: Int) {
-        mBorderPaint.color = colorId
-        invalidate()}
+        mBorderPaint.color = context.resources.getColor(colorId, context.theme)
+        invalidate()
+    }
 
 
     init {

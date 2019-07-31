@@ -13,19 +13,16 @@ fun String.stripHtml():String{
         .replace("\\s+".toRegex(), " ")
 }
 
+fun String.isValidGitHubUrl():Boolean {
+    return if (this == "") true
+    else if (!"""(https://)?(www.)?github.com/(\w*[^/])""".toRegex().matches(this)) false
+    else this.getGitHubName() !in exceptions
+}
+
+private fun String.getGitHubName():String{
+    for (i in (this.length-1) downTo 0) if (this[i]=='/') return this.takeLast(this.length - i - 1)
+    return ""
+}
+
 private val exceptions = setOf("enterprise", "features", "topics", "collections", "trending", "events", "marketplace",
-                               "pricing", "nonprofit", "customer-stories", "security", "login", "join")
-
-fun String.isValidGitHub():Boolean {
-    return if (this in exceptions) false
-    else """(https://)?(www.)?github.com/(\w*[^/])""".toRegex().matches(this)
-}
-
-private fun String.getName():String{
-    var result = ""
-    for (i in this.length..0){
-        if (this[i]=='/') return result
-        else result += this[i]
-    }
-    return result
-}
+    "pricing", "nonprofit", "customer-stories", "security", "login", "join")
