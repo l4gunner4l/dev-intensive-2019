@@ -1,8 +1,5 @@
 package ru.skillbranch.devintensive.ui.profile
 
-import android.annotation.SuppressLint
-import android.content.Context
-import android.graphics.Color
 import android.graphics.ColorFilter
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
