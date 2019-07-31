@@ -102,7 +102,7 @@ class CircleImageView @JvmOverloads constructor(context: Context, attrs: Attribu
     override fun onDraw(canvas: Canvas) {
         drawBitmap(canvas)
         drawStroke(canvas)
-        //drawHighlight(canvas)
+        super.setImageDrawable(drawable)
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -120,17 +120,17 @@ class CircleImageView @JvmOverloads constructor(context: Context, attrs: Attribu
         }
     }
 
-    protected fun drawStroke(canvas: Canvas) {
+    private fun drawStroke(canvas: Canvas) {
         if (mBorderPaint.strokeWidth > 0f) {
             canvas.drawOval(mBorderBounds, mBorderPaint)
         }
     }
 
-    protected fun drawBitmap(canvas: Canvas) {
+    private fun drawBitmap(canvas: Canvas) {
         canvas.drawOval(mBitmapDrawBounds, mBitmapPaint)
     }
 
-    protected fun updateCircleDrawBounds(bounds: RectF) {
+    private fun updateCircleDrawBounds(bounds: RectF) {
         val contentWidth = (width - paddingLeft - paddingRight).toFloat()
         val contentHeight = (height - paddingTop - paddingBottom).toFloat()
 

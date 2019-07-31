@@ -28,7 +28,6 @@ class ProfileActivity : AppCompatActivity(){
     private lateinit var viewFields : Map<String, TextView>
     private lateinit var viewModel: ProfileViewModel
 
-    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(ru.skillbranch.devintensive.R.style.AppTheme)
         super.onCreate(savedInstanceState)

@@ -39,7 +39,6 @@
                     android:layout_width="@dimen/avatar_round_size"
                     android:layout_height="@dimen/avatar_round_size"
                     android:src="@drawable/meee"
-                    app:cv_borderWidth="8dp"
                     android:layout_centerHorizontal="true"
                     android:layout_alignParentTop="true"/>
             <ImageButton
