@@ -24,6 +24,8 @@ fun String.isValidGitHub():Boolean {
 private fun String.getName():String{
     var result = ""
     for (i in this.length..0){
-        result += this[i]
+        if (this[i]=='/') return result
+        else result += this[i]
     }
+    return result
 }
