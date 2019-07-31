@@ -22,13 +22,19 @@ class ExampleUnitTest {
 
     @Test
     fun test_fun() {
-        println("false = " + """\D+""".toRegex().matches("1234"))
-        println("false = " + """\D+""".toRegex().matches("hjdfgudhb0"))
-        println("false = " + """\D+""".toRegex().matches("12hjgndg"))
-        println("true = " + """\D+""".toRegex().matches("metal"))
-        println("true = " + """\D+""".toRegex().matches("iron"))
-        println("true = " + """\D+""".toRegex().matches("Iron"))
-        println("true = " + """\D+""".toRegex().matches("дерево"))
+        println(" //валиден = " + "https://github.com/johnDoe".isValidGitHub())
+        println(" //валиден = " + "https://www.github.com/johnDoe".isValidGitHub())
+        println(" //валиден = " + "www.github.com/johnDoe".isValidGitHub())
+        println(" //валиден = " + "github.com/johnDoe".isValidGitHub())
+        println("")
+        println(" //невалиден = " + "https://anyDomain.github.com/johnDoe".isValidGitHub())
+        println(" //невалиден = " + "https://github.com/".isValidGitHub())
+        println(" //невалиден = " + "https://github.com".isValidGitHub())
+        println(" //невалиден = " + "https://github.com/johnDoe/tree".isValidGitHub())
+        println(" //невалиден = " + "https://github.com/johnDoe/tree/something".isValidGitHub())
+        println(" //невалиден = " + "https://github.com/enterprise".isValidGitHub())
+        println(" //невалиден = " + "https://github.com/pricing".isValidGitHub())
+        println(" //невалиден = " + "https://github.com/join".isValidGitHub())
 
     }
 }

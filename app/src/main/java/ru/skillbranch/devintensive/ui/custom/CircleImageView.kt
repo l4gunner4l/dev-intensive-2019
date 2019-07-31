@@ -71,13 +71,15 @@ class CircleImageView @JvmOverloads constructor(context: Context, attrs: Attribu
     init {
 
         borderColor = DEFAULT_BORDER_COLOR
-        borderWidth = DEFAULT_BORDER_WIDTH
+        borderWidth = DEFAULT_BORDER_WIDTH * resources.displayMetrics.density.toInt()
 
         if (attrs != null) {
             val a = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView, 0, 0)
 
             borderColor = a.getColor(R.styleable.CircleImageView_cv_borderColor, DEFAULT_BORDER_COLOR)
-            borderWidth = a.getDimensionPixelSize(R.styleable.CircleImageView_cv_borderWidth, DEFAULT_BORDER_WIDTH.toInt()).toFloat()
+            borderWidth = a.getDimension(R.styleable.CircleImageView_cv_borderWidth,
+                DEFAULT_BORDER_WIDTH * resources.displayMetrics.density
+            )
 
             a.recycle()
         }
@@ -99,12 +101,6 @@ class CircleImageView @JvmOverloads constructor(context: Context, attrs: Attribu
         setupBitmap()
     }
 
-    override fun onDraw(canvas: Canvas) {
-        drawBitmap(canvas)
-        drawStroke(canvas)
-        super.setImageDrawable(drawable)
-    }
-
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
 
@@ -118,6 +114,11 @@ class CircleImageView @JvmOverloads constructor(context: Context, attrs: Attribu
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             outlineProvider = CircleImageViewOutlineProvider(mBorderBounds)
         }
+    }
+
+    override fun onDraw(canvas: Canvas) {
+        drawBitmap(canvas)
+        drawStroke(canvas)
     }
 
     private fun drawStroke(canvas: Canvas) {

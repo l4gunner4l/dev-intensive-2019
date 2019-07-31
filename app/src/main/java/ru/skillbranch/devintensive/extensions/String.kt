@@ -13,6 +13,10 @@ fun String.stripHtml():String{
         .replace("\\s+".toRegex(), " ")
 }
 
-fun String.isValidate():Boolean {
-    return """\D+""".toRegex().matches(this)
+private val exceptions = setOf("enterprise", "features", "topics", "collections", "trending", "events", "marketplace",
+                               "pricing", "nonprofit", "customer-stories", "security", "login", "join")
+
+fun String.isValidGitHub():Boolean {
+
+    return """(https://)?(www.)?github.com/(\w*[^/])""".toRegex().matches(this)
 }
