@@ -100,9 +100,9 @@ class CircleImageView @JvmOverloads constructor(context: Context, attrs: Attribu
     }
 
     override fun onDraw(canvas: Canvas) {
-        super.setImageDrawable(drawable)
         drawBitmap(canvas)
         drawStroke(canvas)
+        super.setImageDrawable(drawable)
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {

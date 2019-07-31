@@ -12,3 +12,7 @@ fun String.stripHtml():String{
         .replace("[&<>'\"]".toRegex(),"")
         .replace("\\s+".toRegex(), " ")
 }
+
+fun String.isValidate():Boolean {
+    return """\D+""".toRegex().matches(this)
+}

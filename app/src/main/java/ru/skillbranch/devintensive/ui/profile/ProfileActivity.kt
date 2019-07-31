@@ -36,6 +36,7 @@ class ProfileActivity : AppCompatActivity(){
 
         initViews(savedInstanceState)
         initViewModel()
+
     }
 
 
@@ -107,12 +108,12 @@ class ProfileActivity : AppCompatActivity(){
         with(btn_edit){
             val filter: ColorFilter? = if(isEdit) {
                 PorterDuffColorFilter(
-                    resources.getColor(ru.skillbranch.devintensive.R.color.color_accent, theme),
+                    resources.getColor(R.color.color_accent, theme),
                     PorterDuff.Mode.SRC_IN
                 ) }
                 else null
-            val icon = if (isEdit){ resources.getDrawable(ru.skillbranch.devintensive.R.drawable.ic_save_black_24dp, theme) }
-                       else { resources.getDrawable(ru.skillbranch.devintensive.R.drawable.ic_edit_black_24dp, theme) }
+            val icon = if (isEdit){ resources.getDrawable(R.drawable.ic_save_black_24dp, theme) }
+                       else { resources.getDrawable(R.drawable.ic_edit_black_24dp, theme) }
 
             background.colorFilter = filter
             setImageDrawable(icon)
