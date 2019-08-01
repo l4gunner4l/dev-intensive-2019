@@ -106,7 +106,7 @@ class CircleImageView : ImageView {
             invalidate()
         }
     fun setCircleBackgroundColorResource(@ColorRes circleBackgroundRes: Int) {
-        circleBackgroundColor = context.resources.getColor(circleBackgroundRes)
+        circleBackgroundColor = context.resources.getColor(circleBackgroundRes, context.theme)
     }
 
 
