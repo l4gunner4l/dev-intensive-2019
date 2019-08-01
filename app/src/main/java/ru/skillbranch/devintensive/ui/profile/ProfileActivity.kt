@@ -76,6 +76,7 @@ class ProfileActivity : AppCompatActivity(){
             if (!it.isValidGitHubUrl()) wr_repository.error = "Невалидный адрес репозитория"
             else wr_repository.isErrorEnabled = false
         }
+
     }
 
     private fun initViewModel(){
