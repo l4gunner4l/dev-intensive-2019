@@ -119,11 +119,11 @@ class CircleImageView : ImageView {
 
             mBorderWidth = borderWidth
             setup()
-        }
+        }*/
     @Dimension fun getBorderWidth(): Int = mBorderPaint.strokeWidth.toInt()
     fun setBorderWidth(@Dimension(unit = Dimension.DP) dp:Int) {
         mBorderPaint.strokeWidth = dp.toFloat()
-        invalidate()}*/
+        invalidate()}
 
 
     var isBorderOverlay: Boolean
