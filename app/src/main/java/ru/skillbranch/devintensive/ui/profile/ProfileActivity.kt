@@ -24,6 +24,7 @@ import android.content.res.Resources.Theme
 import android.util.TypedValue
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
+import ru.skillbranch.devintensive.R
 
 
 class ProfileActivity : AppCompatActivity(){
@@ -168,11 +169,14 @@ class ProfileActivity : AppCompatActivity(){
         val typedValue = TypedValue()
         theme.resolveAttribute(ru.skillbranch.devintensive.R.attr.colorAvatarBg, typedValue, true)
         @ColorInt val colorBg = typedValue.data
-
-        iv_avatar.setImageDrawable(TextDrawable
-            .builder()
-            .buildRound(viewModel.getProfileData().value?.initials, colorBg))
-        iv_avatar.setupBitmap()
+        val initials = viewModel.getProfileData().value?.initials
+        if (initials == "") iv_avatar.setImageResource(R.drawable.avatar_default)
+        else {
+            iv_avatar.setImageDrawable(TextDrawable
+                .builder()
+                .buildRound(initials, colorBg))
+            iv_avatar.setupBitmap()
+        }
     }
 
 }
