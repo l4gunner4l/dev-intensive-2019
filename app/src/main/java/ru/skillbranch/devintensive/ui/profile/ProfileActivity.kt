@@ -1,5 +1,6 @@
 package ru.skillbranch.devintensive.ui.profile
 
+import android.annotation.SuppressLint
 import android.graphics.ColorFilter
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
@@ -14,11 +15,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_profile.*
-import ru.skillbranch.devintensive.R
+import ru.skillbranch.devintensive.TextDrawable
 import ru.skillbranch.devintensive.extensions.isValidGitHubUrl
 import ru.skillbranch.devintensive.models.Profile
 import ru.skillbranch.devintensive.viewmodels.ProfileViewModel
-
+import android.R.attr.data
+import android.content.res.Resources.Theme
+import android.util.TypedValue
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
 
 
 class ProfileActivity : AppCompatActivity(){
@@ -30,14 +35,13 @@ class ProfileActivity : AppCompatActivity(){
     private lateinit var viewModel: ProfileViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.AppTheme)
+        setTheme(ru.skillbranch.devintensive.R.style.AppTheme)
         super.onCreate(savedInstanceState)
         Log.d("M_ProfileActivity", "onCreate")
-        setContentView(R.layout.activity_profile)
+        setContentView(ru.skillbranch.devintensive.R.layout.activity_profile)
 
         initViews(savedInstanceState)
         initViewModel()
-
     }
 
 
@@ -83,20 +87,27 @@ class ProfileActivity : AppCompatActivity(){
         viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
         viewModel.getProfileData().observe(this, Observer{ updateUI(it) })
         viewModel.getTheme().observe(this, Observer{ updateTheme(it) })
+
+        makeAvatar()
     }
 
     private fun updateTheme(mode: Int) {
-        Log.d("M_ProfileActivity","updateTheme")
         delegate.setLocalNightMode(mode)
+        val typedValue = TypedValue()
+        theme.resolveAttribute(ru.skillbranch.devintensive.R.attr.colorAvatarBg, typedValue, true)
+        @ColorInt val colorBg = typedValue.data
+        Log.d("M_ProfileActivity","updateTheme - colorAvatarBg=$colorBg")
     }
 
     private fun updateUI(profile: Profile) {
         profile.toMap().also {
             for((k,v) in viewFields){
+
                 v.text = it[k].toString()
             }
         }
-
+        makeAvatar()
+        Log.d("M_ProfileActivity","updateUI")
     }
 
     private fun showCurrentMode(isEdit: Boolean) {
@@ -114,12 +125,12 @@ class ProfileActivity : AppCompatActivity(){
         with(btn_edit){
             val filter: ColorFilter? = if(isEdit) {
                 PorterDuffColorFilter(
-                    resources.getColor(R.color.color_accent, theme),
+                    resources.getColor(ru.skillbranch.devintensive.R.color.color_accent, theme),
                     PorterDuff.Mode.SRC_IN
                 ) }
                 else null
-            val icon = if (isEdit){ resources.getDrawable(R.drawable.ic_save_black_24dp, theme) }
-                       else { resources.getDrawable(R.drawable.ic_edit_black_24dp, theme) }
+            val icon = if (isEdit){ resources.getDrawable(ru.skillbranch.devintensive.R.drawable.ic_save_black_24dp, theme) }
+                       else { resources.getDrawable(ru.skillbranch.devintensive.R.drawable.ic_edit_black_24dp, theme) }
 
             background.colorFilter = filter
             setImageDrawable(icon)
@@ -136,6 +147,7 @@ class ProfileActivity : AppCompatActivity(){
         ).apply {
             viewModel.saveProfileData(this)
         }
+
     }
 
     private fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
@@ -150,6 +162,17 @@ class ProfileActivity : AppCompatActivity(){
                 afterTextChanged.invoke(editable.toString())
             }
         })
+    }
+
+    private fun makeAvatar(){
+        val typedValue = TypedValue()
+        theme.resolveAttribute(ru.skillbranch.devintensive.R.attr.colorAvatarBg, typedValue, true)
+        @ColorInt val colorBg = typedValue.data
+
+        iv_avatar.setImageDrawable(TextDrawable
+            .builder()
+            .buildRound(viewModel.getProfileData().value?.initials, colorBg))
+        iv_avatar.setupBitmap()
     }
 
 }
