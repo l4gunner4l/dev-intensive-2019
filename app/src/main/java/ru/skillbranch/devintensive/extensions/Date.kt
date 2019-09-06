@@ -46,6 +46,17 @@ fun Date.add(value: Int, units: TimeUnits = TimeUnits.SECOND): Date {
     return this
 }
 
+fun Date.shortFormat(): String? {
+    val pattern = if (this.isSameDate(Date())) "HH:mm" else "dd.MM.yy"
+    return SimpleDateFormat(pattern, Locale("ru")).format(this)
+}
+
+fun Date.isSameDate(date: Date): Boolean {
+    val day1 = this.time / DAY
+    val day2 = date.time / DAY
+    return day1 == day2
+}
+
 enum class TimeUnits{
     SECOND, MINUTE, HOUR, DAY;
     fun plural(value: Int):String{

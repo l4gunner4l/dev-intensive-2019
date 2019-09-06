@@ -1,5 +1,6 @@
-package ru.skillbranch.devintensive.models
+package ru.skillbranch.devintensive.models.data
 
+import ru.skillbranch.devintensive.extensions.humanizeDiff
 import ru.skillbranch.devintensive.utils.Utils
 import java.util.*
 
@@ -10,13 +11,28 @@ data class User constructor(
     var avatar:String?,
     var rating:Int = 0,
     var respect:Int = 0,
-    var lastVisit:Date? = Date(),
+    var lastVisit:Date? = null,
     var isOnline:Boolean = false
     ) {
 
-    init {
-        println("User ${this.firstName} had created.")
+    fun toUserItem(): UserItem {
+        val lastActivity = when {
+            lastVisit==null -> "Ещё ни разу не заходил"
+            isOnline -> "online"
+            else -> "Последний раз был ${lastVisit!!.humanizeDiff()}"
+        }
+        return UserItem(
+            id,
+            "${firstName.orEmpty()} ${lastName.orEmpty()}",
+            Utils.toInitials(firstName, lastName),
+            avatar,
+            lastActivity,
+            false,
+            isOnline
+            )
     }
+
+    init { println("User ${this.firstName} had created.") }
 
     fun printUser() = println("""
 ${"\n"}
@@ -33,10 +49,10 @@ isOnline - ${this.isOnline}
 
     companion object Factory{
         private var lastId : Int = -1
-        fun makeUser(fullName: String?): User{
+        fun makeUser(fullName: String?): User {
             lastId++
             val (firstName, lastName) = Utils.parseFullName(fullName)
-            return User.Builder()
+            return Builder()
                 .id("$lastId")
                 .firstName(firstName)
                 .lastName(lastName)
@@ -64,6 +80,7 @@ isOnline - ${this.isOnline}
         fun isOnline(isOnline:Boolean) = apply { this.isOnline = isOnline }
 
         fun build() = User(
-            id, firstName, lastName, avatar, rating, respect, lastVisit, isOnline)
+            id, firstName, lastName, avatar, rating, respect, lastVisit, isOnline
+        )
     }
 }

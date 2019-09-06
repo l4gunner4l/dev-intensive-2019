@@ -36,10 +36,10 @@ class ProfileActivity : AppCompatActivity(){
     private lateinit var viewModel: ProfileViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(ru.skillbranch.devintensive.R.style.AppTheme)
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         Log.d("M_ProfileActivity", "onCreate")
-        setContentView(ru.skillbranch.devintensive.R.layout.activity_profile)
+        setContentView(R.layout.activity_profile)
 
         initViews(savedInstanceState)
         initViewModel()
@@ -95,7 +95,7 @@ class ProfileActivity : AppCompatActivity(){
     private fun updateTheme(mode: Int) {
         delegate.setLocalNightMode(mode)
         val typedValue = TypedValue()
-        theme.resolveAttribute(ru.skillbranch.devintensive.R.attr.colorAvatarBg, typedValue, true)
+        theme.resolveAttribute(R.attr.colorAvatarBg, typedValue, true)
         @ColorInt val colorBg = typedValue.data
         Log.d("M_ProfileActivity","updateTheme - colorAvatarBg=$colorBg")
     }
@@ -126,12 +126,12 @@ class ProfileActivity : AppCompatActivity(){
         with(btn_edit){
             val filter: ColorFilter? = if(isEdit) {
                 PorterDuffColorFilter(
-                    resources.getColor(ru.skillbranch.devintensive.R.color.color_accent, theme),
+                    resources.getColor(R.color.color_accent, theme),
                     PorterDuff.Mode.SRC_IN
                 ) }
                 else null
-            val icon = if (isEdit){ resources.getDrawable(ru.skillbranch.devintensive.R.drawable.ic_save_black_24dp, theme) }
-                       else { resources.getDrawable(ru.skillbranch.devintensive.R.drawable.ic_edit_black_24dp, theme) }
+            val icon = if (isEdit){ resources.getDrawable(R.drawable.ic_save_black_24dp, theme) }
+                       else { resources.getDrawable(R.drawable.ic_edit_black_24dp, theme) }
 
             background.colorFilter = filter
             setImageDrawable(icon)
@@ -167,7 +167,7 @@ class ProfileActivity : AppCompatActivity(){
 
     private fun makeAvatar(){
         val typedValue = TypedValue()
-        theme.resolveAttribute(ru.skillbranch.devintensive.R.attr.colorAvatarBg, typedValue, true)
+        theme.resolveAttribute(R.attr.colorAvatarBg, typedValue, true)
         @ColorInt val colorBg = typedValue.data
         val initials = viewModel.getProfileData().value?.initials
         if (initials == "") iv_avatar.setImageResource(R.drawable.avatar_default)
