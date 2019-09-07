@@ -1,10 +1,9 @@
 package ru.skillbranch.devintensive.models.data
 
-import ru.skillbranch.devintensive.data.CacheManager
 import ru.skillbranch.devintensive.extensions.shortFormat
 import ru.skillbranch.devintensive.models.BaseMessage
+import ru.skillbranch.devintensive.models.ImageMessage
 import ru.skillbranch.devintensive.models.TextMessage
-import ru.skillbranch.devintensive.utils.DataGenerator
 import ru.skillbranch.devintensive.utils.Utils
 import java.util.*
 
@@ -47,21 +46,23 @@ data class Chat(
 
     }
 
-    fun unreadableMessageCount(): Int {
-        return 7
-    }
+    private fun unreadableMessageCount() = messages.count { !it.isReaded }
 
     private fun lastMessageDate(): Date? {
-        return messages.last().date
+        return messages.lastOrNull()?.date
     }
 
-    /*private fun lastMessageShort(): Pair<String, String> {
-        val lastFrom = messages.last().from?.firstName ?: "-"
-        val lastMsg= if (messages.lastOrNull() is TextMessage) messages.last().text
-        else messages.last().image
-        return lastMsg to lastFrom
-    }*/
-    private fun lastMessageShort(): Pair<String, String> = "msg" to "from me"
+    private fun lastMessageShort(): Pair<String, String> {
+        val lastMsg = messages.lastOrNull() ?: return "Сообщений пока нет" to ""
+        val lastFrom = lastMsg.from.firstName ?: "error0"
+        val lastMsgText =
+        when (lastMsg) {
+            is TextMessage -> lastMsg.text ?: "error2"
+            is ImageMessage -> "$lastFrom - отправил фото"
+            else -> "error4"
+        }
+        return lastMsgText to lastFrom
+    }
 
     private fun isSingle() = members.size == 1
 
