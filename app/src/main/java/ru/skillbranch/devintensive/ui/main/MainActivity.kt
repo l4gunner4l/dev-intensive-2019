@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(rv, "Click on ${it.title}", Snackbar.LENGTH_SHORT).show()
         }
 
-        fab.setOnClickListener {
+        fab_add.setOnClickListener {
             val intent = Intent(this, GroupActivity::class.java)
             startActivity(intent)
 
