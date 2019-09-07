@@ -46,13 +46,13 @@ data class Chat(
 
     }
 
-    private fun unreadableMessageCount() = messages.count { !it.isReaded }
+    fun unreadableMessageCount() = messages.count { !it.isReaded }
 
-    private fun lastMessageDate(): Date? {
+    fun lastMessageDate(): Date? {
         return messages.lastOrNull()?.date
     }
 
-    private fun lastMessageShort(): Pair<String, String> {
+    fun lastMessageShort(): Pair<String, String> {
         val lastMsg = messages.lastOrNull() ?: return "Сообщений пока нет" to ""
         val lastFrom = lastMsg.from.firstName ?: "error0"
         val lastMsgText =
@@ -64,7 +64,7 @@ data class Chat(
         return lastMsgText to lastFrom
     }
 
-    private fun isSingle() = members.size == 1
+    fun isSingle() = members.size == 1
 
     enum class ChatType{
         SINGLE,
