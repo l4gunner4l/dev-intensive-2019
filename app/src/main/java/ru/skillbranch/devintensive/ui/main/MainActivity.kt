@@ -65,17 +65,21 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(rv, "Click on ${it.title}", Snackbar.LENGTH_SHORT).show()
         }
 
-        fab_add.setOnClickListener {
+        fab.setOnClickListener {
             val intent = Intent(this, GroupActivity::class.java)
             startActivity(intent)
-
-
         }
 
         val touchCallback = ChatItemTouchHelperCallback(chatAdapter){
-            viewModel.addToArchive(it.id)
-            Snackbar.make(rv, "Вы точно хотите добавить ${it.title} в архив?", Snackbar.LENGTH_LONG).show()
+            val itId = it.id
+            viewModel.addToArchive(itId)
+            Snackbar
+                .make(rv, "Вы точно хотите добавить ${it.title} в архив?", Snackbar.LENGTH_LONG)
+                .setAction("Отмена") { viewModel.restoreFromArchive(itId) }
+                .show()
         }
+
+
         val touchHelper = ItemTouchHelper(touchCallback)
         touchHelper.attachToRecyclerView(rv)
 
