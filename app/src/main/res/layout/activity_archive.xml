@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+        <!--Сверстай экран архивов чатов, он должен содержать в себе следующие View:
+        AppBarLayout и тулбар (Toolbar) @+id/toolbar
+        Список архивных чатов (RecyclerView) @+id/rv_archive_list
+
+        ArchiveActivity должно реализовывать следующий функционал :
+        Восстановление чата из архива выполняется свайпом влево на элементе списка
+        (после восстановления из архива восстановленный чат не должен отображаться
+        в списке архивных чатов rv_archive_list,
+        но должен отображаться в списке активных чатов rv_chat_list)-->
+
 <androidx.coordinatorlayout.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -21,7 +32,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_chat_list"
+            android:id="@+id/rv_archive_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="?attr/actionBarSize"
@@ -33,14 +44,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/spacing_normal_16"
-            android:src="@drawable/ic_add"/>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_archive"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top|end"
-            android:layout_margin="@dimen/spacing_huge_32"
             android:src="@drawable/ic_add"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

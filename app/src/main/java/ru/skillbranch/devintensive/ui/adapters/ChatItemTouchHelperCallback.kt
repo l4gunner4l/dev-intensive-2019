@@ -4,6 +4,7 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.RectF
+import android.graphics.drawable.Drawable
 import android.view.View
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +19,8 @@ class ChatItemTouchHelperCallback(
     private val bgRect = RectF()
     private val bgPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val iconBounds = Rect()
+
+    var isMain = true
 
     override fun getMovementFlags(
         recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder
@@ -65,7 +68,8 @@ class ChatItemTouchHelperCallback(
     }
 
     private fun drawIcon(canvas: Canvas, itemView: View, dX: Float) {
-        val icon = itemView.resources.getDrawable(R.drawable.ic_archive, itemView.context.theme)
+        val icon = if (isMain) itemView.resources.getDrawable(R.drawable.ic_archive, itemView.context.theme)
+                        else itemView.resources.getDrawable(R.drawable.ic_unarchive, itemView.context.theme)
         val iconSize = itemView.resources.getDimensionPixelSize(R.dimen.icon_size)
         val space = itemView.resources.getDimensionPixelSize(R.dimen.spacing_normal_16)
         val margin = (itemView.bottom - itemView.top - iconSize)/2

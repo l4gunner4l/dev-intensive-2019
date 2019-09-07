@@ -6,16 +6,14 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import ru.skillbranch.devintensive.extensions.mutableLiveData
 import ru.skillbranch.devintensive.models.data.ChatItem
-import ru.skillbranch.devintensive.models.data.UserItem
 import ru.skillbranch.devintensive.repositories.ChatRepository
 
-class MainViewModel : ViewModel() {
-
+class ArchiveViewModel : ViewModel() {
     private val query = mutableLiveData("")
     private val chatRepository = ChatRepository
     private val chats = Transformations.map(chatRepository.loadChats()){ chats ->
         return@map chats
-            .filter{ !it.isArchived }
+            .filter{ it.isArchived }
             .map { it.toChatItem() }
             .sortedBy { it.id.toInt() }
     }
@@ -34,12 +32,6 @@ class MainViewModel : ViewModel() {
         return result
     }
 
-    fun addToArchive(chatId: String) {
-        val chat = chatRepository.find(chatId)
-        chat ?: return
-        chatRepository.update(chat.copy(isArchived = true))
-    }
-
     fun restoreFromArchive(chatId: String) {
         val chat = chatRepository.find(chatId)
         chat ?: return
@@ -50,4 +42,9 @@ class MainViewModel : ViewModel() {
         query.value = text
     }
 
+    fun addToArchive(chatId: String) {
+        val chat = chatRepository.find(chatId)
+        chat ?: return
+        chatRepository.update(chat.copy(isArchived = true))
+    }
 }
