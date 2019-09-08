@@ -23,8 +23,6 @@ class ChatAdapter(val listener : (ChatItem)->Unit) : RecyclerView.Adapter<ChatAd
     var items : List<ChatItem> = listOf()
 
     override fun getItemViewType(position: Int): Int {
-        /*if (position==0 && ChatRepository.loadChats().value!!.count{it.isArchived}!=0)
-            return ARCHIVE_TYPE*/
         return when(items[position].chatType) {
             ChatType.SINGLE -> SINGLE_TYPE
             ChatType.ARCHIVE -> ARCHIVE_TYPE
@@ -44,7 +42,7 @@ class ChatAdapter(val listener : (ChatItem)->Unit) : RecyclerView.Adapter<ChatAd
 
     }
 
-    override fun getItemCount() = items.size// + if (ChatRepository.loadChats().value!!.count{it.isArchived}>0) 1 else 0
+    override fun getItemCount() = items.size + if (ChatRepository.loadChats().value!!.count{it.isArchived}>0) 1 else 0
 
     override fun onBindViewHolder(holder: ChatItemViewHolder, position: Int) {
         Log.d("M_ChatAdapter", "onBindViewHolder() item id="+items[position].id)

@@ -1,5 +1,6 @@
 package ru.skillbranch.devintensive.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Transformations
@@ -7,6 +8,7 @@ import androidx.lifecycle.Transformations.map
 import androidx.lifecycle.ViewModel
 import ru.skillbranch.devintensive.extensions.mutableLiveData
 import ru.skillbranch.devintensive.models.data.ChatItem
+import ru.skillbranch.devintensive.models.data.ChatType
 import ru.skillbranch.devintensive.models.data.UserItem
 import ru.skillbranch.devintensive.repositories.ChatRepository
 import java.util.Locale.filter
@@ -26,11 +28,13 @@ class MainViewModel : ViewModel() {
         val result = MediatorLiveData<List<ChatItem>>()
         val filterF = {
             val queryStr = query.value!!
-            val mChats = chats.value!!.toMutableList()
+            var mChats:MutableList<ChatItem> = mutableListOf()
 
-            if(getLastArchivedChatItem() != null) {
-                mChats.add(0, getLastArchivedChatItem()!!)
+            if(chatRepository.getArchiveChatsCount()!=0) {
+                mChats = mutableListOf(getArchiveItem())
             }
+
+            mChats.addAll(chats.value!!)
 
             result.value = if (queryStr.isEmpty()) mChats
             else mChats.filter{ it.title.contains(queryStr, true) }
@@ -39,11 +43,6 @@ class MainViewModel : ViewModel() {
         result.addSource(query){ filterF.invoke() }
 
         return result
-    }
-
-    private fun getLastArchivedChatItem(): ChatItem? {
-        val chats = chatRepository.loadChats()
-        return chats.value?.filter { it.isArchived }?.map { it.toChatItem() }?.lastOrNull()
     }
 
 
@@ -61,6 +60,22 @@ class MainViewModel : ViewModel() {
 
     fun handleSearchQuery(text: String) {
         query.value = text
+    }
+
+    private fun getArchiveItem(): ChatItem {
+        Log.d("M_MainViewModel", "${chatRepository.getArchiveUnreadMessageCount()}")
+        return ChatItem(
+            "-1",
+            null,
+            "??",
+            "Архив чатов",
+            chatRepository.getShortDescription(),
+            chatRepository.getArchiveUnreadMessageCount(),
+            chatRepository.getLastDate(),
+            false,
+            ChatType.ARCHIVE,
+            chatRepository.getLastAuthor()
+        )
     }
 
 }
