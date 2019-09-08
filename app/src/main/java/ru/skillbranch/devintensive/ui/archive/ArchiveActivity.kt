@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_archive.*
-import kotlinx.android.synthetic.main.activity_archive.fab
 import kotlinx.android.synthetic.main.activity_archive.toolbar
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.skillbranch.devintensive.R
@@ -90,7 +89,7 @@ class ArchiveActivity : AppCompatActivity() {
                     viewModel.addToArchive(itId)
                 }
                 .show()
-            Toast.makeText(this@ArchiveActivity, "${ChatRepository.loadChats().value!!.count{it.isArchived}} - archivedChats", Toast.LENGTH_LONG).show()
+            //Toast.makeText(this@ArchiveActivity, "${ChatRepository.loadChats().value!!.count{it.isArchived}} - archivedChats", Toast.LENGTH_LONG).show()
         }
         touchCallback.isMain = false
 

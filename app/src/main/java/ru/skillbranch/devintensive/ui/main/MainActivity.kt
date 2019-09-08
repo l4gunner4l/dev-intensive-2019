@@ -73,11 +73,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        fab_archive.setOnClickListener {
-            val intent = Intent(this, ArchiveActivity::class.java)
-            startActivity(intent)
-        }
-
         val touchCallback = ChatItemTouchHelperCallback(chatAdapter){
             val itId = it.id
             viewModel.addToArchive(itId)
@@ -87,7 +82,7 @@ class MainActivity : AppCompatActivity() {
                     viewModel.restoreFromArchive(itId)
                 }
                 .show()
-            Toast.makeText(this@MainActivity, "${ChatRepository.loadChats().value!!.count{it.isArchived}} - archivedChats", Toast.LENGTH_LONG).show()
+                //Toast.makeText(this@MainActivity, "${ChatRepository.loadChats().value!!.count{it.isArchived}} - archivedChats", Toast.LENGTH_LONG).show()
         }
 
         val touchHelper = ItemTouchHelper(touchCallback)

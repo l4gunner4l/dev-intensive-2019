@@ -1,5 +1,6 @@
 package ru.skillbranch.devintensive.ui.adapters
 
+import android.content.Intent
 import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,6 +19,7 @@ import ru.skillbranch.devintensive.models.data.Chat
 import ru.skillbranch.devintensive.models.data.ChatItem
 import ru.skillbranch.devintensive.models.data.ChatType
 import ru.skillbranch.devintensive.repositories.ChatRepository
+import ru.skillbranch.devintensive.ui.archive.ArchiveActivity
 
 class ChatAdapter(val listener : (ChatItem)->Unit) : RecyclerView.Adapter<ChatAdapter.ChatItemViewHolder>() {
     var items : List<ChatItem> = listOf()
@@ -42,7 +44,7 @@ class ChatAdapter(val listener : (ChatItem)->Unit) : RecyclerView.Adapter<ChatAd
 
     }
 
-    override fun getItemCount() = items.size + if (ChatRepository.loadChats().value!!.count{it.isArchived}>0) 1 else 0
+    override fun getItemCount() = items.size// + if (ChatRepository.getArchiveChatsCount()>0) 1 else 0
 
     override fun onBindViewHolder(holder: ChatItemViewHolder, position: Int) {
         Log.d("M_ChatAdapter", "onBindViewHolder() item id="+items[position].id)
@@ -119,6 +121,14 @@ class ChatAdapter(val listener : (ChatItem)->Unit) : RecyclerView.Adapter<ChatAd
 
     inner class ArchiveViewHolder(convertView: View)
         : ChatItemViewHolder(convertView) {
+
+        init {
+            itemView.setOnClickListener {
+                val intent = Intent(itemView.context, ArchiveActivity::class.java)
+                itemView.context.startActivity(intent)
+            }
+
+        }
 
         override fun bind(item: ChatItem, listener: (ChatItem) -> Unit) {
             tv_message_author_archive.text = item.author
