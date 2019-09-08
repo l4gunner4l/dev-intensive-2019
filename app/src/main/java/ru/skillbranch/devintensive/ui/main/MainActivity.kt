@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.skillbranch.devintensive.R
+import ru.skillbranch.devintensive.repositories.ChatRepository
 import ru.skillbranch.devintensive.ui.adapters.ChatAdapter
 import ru.skillbranch.devintensive.ui.adapters.ChatItemTouchHelperCallback
 import ru.skillbranch.devintensive.ui.archive.ArchiveActivity
@@ -81,10 +83,12 @@ class MainActivity : AppCompatActivity() {
             viewModel.addToArchive(itId)
             Snackbar
                 .make(rv, "Вы точно хотите добавить ${it.title} в архив?", Snackbar.LENGTH_LONG)
-                .setAction("Отмена") { viewModel.restoreFromArchive(itId) }
+                .setAction("Отмена") {
+                    viewModel.restoreFromArchive(itId)
+                }
                 .show()
+            Toast.makeText(this@MainActivity, "${ChatRepository.loadChats().value!!.count{it.isArchived}} - archivedChats", Toast.LENGTH_LONG).show()
         }
-
 
         val touchHelper = ItemTouchHelper(touchCallback)
         touchHelper.attachToRecyclerView(rv)

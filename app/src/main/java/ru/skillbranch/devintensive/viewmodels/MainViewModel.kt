@@ -3,11 +3,13 @@ package ru.skillbranch.devintensive.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Transformations
+import androidx.lifecycle.Transformations.map
 import androidx.lifecycle.ViewModel
 import ru.skillbranch.devintensive.extensions.mutableLiveData
 import ru.skillbranch.devintensive.models.data.ChatItem
 import ru.skillbranch.devintensive.models.data.UserItem
 import ru.skillbranch.devintensive.repositories.ChatRepository
+import java.util.Locale.filter
 
 class MainViewModel : ViewModel() {
 
@@ -24,7 +26,12 @@ class MainViewModel : ViewModel() {
         val result = MediatorLiveData<List<ChatItem>>()
         val filterF = {
             val queryStr = query.value!!
-            val mChats = chats.value!!
+            val mChats = chats.value!!.toMutableList()
+
+            if(getLastArchivedChatItem() != null) {
+                mChats.add(0, getLastArchivedChatItem()!!)
+            }
+
             result.value = if (queryStr.isEmpty()) mChats
             else mChats.filter{ it.title.contains(queryStr, true) }
         }
@@ -33,6 +40,12 @@ class MainViewModel : ViewModel() {
 
         return result
     }
+
+    private fun getLastArchivedChatItem(): ChatItem? {
+        val chats = chatRepository.loadChats()
+        return chats.value?.filter { it.isArchived }?.map { it.toChatItem() }?.lastOrNull()
+    }
+
 
     fun addToArchive(chatId: String) {
         val chat = chatRepository.find(chatId)

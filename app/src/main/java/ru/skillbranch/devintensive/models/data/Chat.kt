@@ -66,12 +66,12 @@ data class Chat(
 
     fun isSingle() = members.size == 1
 
-    enum class ChatType{
-        SINGLE,
-        GROUP,
-        ARCHIVE
-    }
+}
 
+enum class ChatType{
+    SINGLE,
+    GROUP,
+    ARCHIVE
 }
 
 

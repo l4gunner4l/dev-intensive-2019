@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -18,6 +19,7 @@ import kotlinx.android.synthetic.main.activity_archive.fab
 import kotlinx.android.synthetic.main.activity_archive.toolbar
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.skillbranch.devintensive.R
+import ru.skillbranch.devintensive.repositories.ChatRepository
 import ru.skillbranch.devintensive.ui.adapters.ChatAdapter
 import ru.skillbranch.devintensive.ui.adapters.ChatItemTouchHelperCallback
 import ru.skillbranch.devintensive.ui.group.GroupActivity
@@ -84,8 +86,11 @@ class ArchiveActivity : AppCompatActivity() {
             viewModel.restoreFromArchive(itId)
             Snackbar
                 .make(rv, "Востановить чат с ${it.title} из архива?", Snackbar.LENGTH_LONG)
-                .setAction("Отмена") { viewModel.addToArchive(itId) }
+                .setAction("Отмена") {
+                    viewModel.addToArchive(itId)
+                }
                 .show()
+            Toast.makeText(this@ArchiveActivity, "${ChatRepository.loadChats().value!!.count{it.isArchived}} - archivedChats", Toast.LENGTH_LONG).show()
         }
         touchCallback.isMain = false
 

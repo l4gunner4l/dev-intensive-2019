@@ -7,18 +7,18 @@
         android:background="@android:color/white">
 
     <ru.skillbranch.devintensive.ui.custom.CircleImageView
-            android:id="@+id/iv_avatar_archive"
+            android:id="@+id/iv_avatar_group"
             android:layout_width="@dimen/item_avatar_size"
             android:layout_height="@dimen/item_avatar_size"
             android:layout_marginEnd="@dimen/spacing_normal_16"
             android:layout_alignParentStart="true"/>
 
     <TextView
-            android:id="@+id/tv_title_archive"
+            android:id="@+id/tv_title_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/iv_avatar_archive"
-            android:layout_toStartOf="@id/tv_date_archive"
+            android:layout_toEndOf="@id/iv_avatar_group"
+            android:layout_toStartOf="@id/tv_date_group"
             android:layout_marginEnd="@dimen/spacing_normal_16"
             android:textColor="@color/color_primary"
             android:fontFamily="sans-serif-medium"
@@ -27,11 +27,11 @@
             tools:text="Name Surname"/>
 
     <TextView
-            android:id="@+id/tv_message_author_archive"
+            android:id="@+id/tv_message_author_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/iv_avatar_archive"
-            android:layout_below="@id/tv_title_archive"
+            android:layout_toEndOf="@id/iv_avatar_group"
+            android:layout_below="@id/tv_title_group"
             android:layout_marginEnd="4dp"
             android:textColor="@color/color_primary"
             android:textSize="14sp"
@@ -39,12 +39,12 @@
             tools:text="Nikola"/>
 
     <TextView
-            android:id="@+id/tv_message_archive"
+            android:id="@+id/tv_message_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/tv_message_author_archive"
-            android:layout_toStartOf="@id/tv_counter_archive"
-            android:layout_below="@id/tv_title_archive"
+            android:layout_toEndOf="@id/tv_message_author_group"
+            android:layout_toStartOf="@id/tv_counter_group"
+            android:layout_below="@id/tv_title_group"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="@dimen/spacing_normal_16"
             android:textColor="@color/color_gray_dark"
@@ -54,7 +54,7 @@
             tools:text="Hello"/>
 
     <TextView
-            android:id="@+id/tv_date_archive"
+            android:id="@+id/tv_date_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -64,7 +64,7 @@
             android:textColor="@color/color_gray_dark"
             tools:text="14:29"/>
     <TextView
-            android:id="@+id/tv_counter_archive"
+            android:id="@+id/tv_counter_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
