@@ -131,7 +131,7 @@ class ChatAdapter(val listener : (ChatItem)->Unit) : RecyclerView.Adapter<ChatAd
         }
 
         override fun bind(item: ChatItem, listener: (ChatItem) -> Unit) {
-            tv_message_author_archive.text = item.author
+            tv_message_author_archive.text = "@"+item.author
             tv_message_archive.text = item.shortDescription
 
             with(tv_date_archive){
